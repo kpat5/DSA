@@ -1,3 +1,4 @@
+// package Sorting;
 public class sorting {
     int[] bubbleSort(int arr[])
     {
@@ -64,6 +65,59 @@ public class sorting {
         }
         return arr;
     }
+
+    void merge(int arr[],int l,int m,int r)
+    {
+        int len1=m-l+1;
+        int len2=r-m;
+        int arr1[]=new int[len1];
+        int arr2[]=new int[len2];
+        for(int i=0;i<len1;i++)
+        {
+            arr1[i]=arr[l+i];
+        }
+        for(int j=0;j<len2;j++)
+        {
+            arr2[j]=arr[m+j+1];
+        }
+        int i=0;
+        int j=0;
+        int k=l;
+        while(i<len1&&j<len2)
+        {
+            if(arr1[i]<arr2[j])
+            {
+                arr[k]=arr1[i];
+                i++;
+            }
+            else{
+                arr[k]=arr2[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<len1){
+            arr[k]=arr1[i];
+            i++;
+            k++;
+        }
+        while(j<len2){
+            arr[k]=arr2[j];
+            j++;
+            k++;
+        }
+    }
+
+    void mergeSort(int arr[],int l,int r)
+    {
+        if(l<r){
+            int m=l+(r-l)/2;
+            mergeSort(arr, l, m);
+            mergeSort(arr, m+1, r);
+            merge(arr, l, m, r);
+        }
+    }
+
     void print(int arr[])
     {
         for(int i=0;i<arr.length;i++)
@@ -78,8 +132,10 @@ public class sorting {
         // int ans[]=obj.bubbleSort(arr);
         // int ans[]=obj.recursiveBubbleSort(arr,arr.length);
         // int ans[]=obj.selectionSort(arr);
-        int ans[]=obj.insertionSort(arr);
-        obj.print(ans);
+        // int ans[]=obj.insertionSort(arr);
+        obj.mergeSort(arr,0, arr.length-1);
+        // obj.print(ans);
+        obj.print(arr);
     }
 }
 
